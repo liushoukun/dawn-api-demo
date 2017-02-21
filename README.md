@@ -195,7 +195,7 @@ composer install
 |:---:|:---:|:---:|:---:|
 |client_id|true|客户端ID||
 |time|true|请求时间||
-|sign|true|签名|md5(md5(client_id + time + secret))|
+|sign|true|签名md5(md5(client_id + time + secret))||
 |grant_type|false|认证类型| client_credentials 或 refresh_token |
 
 
