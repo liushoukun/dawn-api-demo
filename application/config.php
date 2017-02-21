@@ -192,6 +192,10 @@ return [
         'prefix' => '',
         // 缓存有效期 0表示永久缓存
         'expire' => 0,
+//        'type' => 'redis',
+//        'host' => '172.16.8.155',
+//        'select' => '2',
+
 
 
     ],
@@ -239,6 +243,5 @@ return [
         'list_rows' => 15,
     ],
 
-
-    'api_auth' => true,
+    'api_auth' => true,//是否开启API认证
 ];

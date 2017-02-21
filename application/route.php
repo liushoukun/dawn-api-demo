@@ -14,10 +14,11 @@ return [
         'name' => '\w+',
     ],
     //获取认证信息
-    'accessToken' => 'location/AccessToken/accessToken',
-    'refreshToken' => 'location/AccessToken/refreshToken',
+    'accessToken' => 'test/AccessToken/accessToken',
+    'refreshToken' => 'test/AccessToken/refreshToken',
+
     '[v1]' => [
-        'test' => ['location/Index/init', [], ],
+        'test' => ['test/Test/init',],
     ],
 
 ];

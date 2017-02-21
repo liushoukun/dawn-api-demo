@@ -30,9 +30,9 @@ class BaseAuth extends Common
 
     public function auth(Request $request)
     {
-
         //  1、获取accessToken
         $accessToken = $request->header('authorization');
+        $accessToken =  str_replace("token ","", $accessToken);
         if (empty($accessToken) || strlen($accessToken) < 32 || $accessToken == false) {
             $this->error = self::ACCESS_TOKEN_ERROR;
             return false;
@@ -64,6 +64,8 @@ class BaseAuth extends Common
     public function accessToken(Request $request)
     {
 
+//        dump(self::makeSign('11111111',1487664463,'qwekjznc120cnsdkjhad'));
+//        die();
         // grant_type=client_credentials
         $grant_type = $request->param('grant_type');//认证类型  client_credentials
         $client_id = $request->param('client_id', '');//应用ID
@@ -152,14 +154,13 @@ class BaseAuth extends Common
      * @param $client_id 应用ID
      * @return array
      */
-    protected function getClient($client_id)
+    public function getClient($client_id)
     {
-        if ('11111111' != $client_id) return false;
         return [
             'client_name' => 'test',//客户端账户名称
             'client_id' => '11111111',//客户端账户id
             'secret' => 'qwekjznc120cnsdkjhad',  //加密秘钥
-            'authorization_list' => 'location/Index/init,',//权限列表
+            'authorization_list' => 'test/Test/init,',//权限列表
         ];
     }
 

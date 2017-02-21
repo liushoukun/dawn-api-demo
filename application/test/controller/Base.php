@@ -4,18 +4,23 @@
 // +----------------------------------------------------------------------
 // | Company: YG | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/2/17 10:08
 // +----------------------------------------------------------------------
-// | TITLE: 模块 API 公共类
+// | TITLE: 业务基础类
 // +----------------------------------------------------------------------
 
 
-namespace app\location\controller;
+namespace app\test\controller;
 
 
 use app\apilib\BaseRest;
 
+/**
+ * 业务基础类
+ * Class Base
+ * @package app\test\controller
+ */
 class Base extends BaseRest
 {
-    public    $apiAuth = true;
+
     // 允许访问的请求类型
     protected $restMethodList = 'get|post|put|delete|patch|head|options';
     //业务错误码的映射表
@@ -26,4 +31,6 @@ class Base extends BaseRest
         9999 => '自定义错误'//让程序给出的自定义错误
     ];
 
+    //是否开启权限认证
+    public    $apiAuth = true;
 }
