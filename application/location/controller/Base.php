@@ -11,7 +11,7 @@
 namespace app\location\controller;
 
 
-use app\lib\BaseRest;
+use app\apilib\BaseRest;
 
 class Base extends BaseRest
 {

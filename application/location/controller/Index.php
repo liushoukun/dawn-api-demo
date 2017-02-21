@@ -21,13 +21,6 @@ class Index extends Base
 
 
 
-    public function location(Request $request)
-    {
-
-
-    }
-
-
 
     /**
      * get的响应
@@ -36,9 +29,8 @@ class Index extends Base
      */
     public function getResponse(Request $request)
     {
-        return $this->setResponseArr(222);
+        return $this->sendError(9999,'sss');
     }
-
 
 
 

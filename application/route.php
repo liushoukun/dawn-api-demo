@@ -13,12 +13,11 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
+    //获取认证信息
+    'accessToken' => 'location/AccessToken/accessToken',
+    'refreshToken' => 'location/AccessToken/refreshToken',
     '[v1]' => [
-        'index' => ['location/index/index'],
-        'location/:address' => ['location/index/init',[],['address'=>'\w+']],
-        '/' => ['location/index/index'],
-
+        'test' => ['location/Index/init', [], ],
     ],
-//    'v1' =>['location/index/index',['method'=>'get']]
 
 ];
