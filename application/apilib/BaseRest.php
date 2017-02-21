@@ -17,7 +17,7 @@ class BaseRest extends Common
 {
 
     //是否权限验证
-    public static $apiAuth = false;
+    public  $apiAuth = false;
 
     //业务错误码的映射表
     public $errMap = [
@@ -31,7 +31,7 @@ class BaseRest extends Common
     {
 
         //判断是否开启权限验证
-        self::$apiAuth = (config('api_auth')) ? true : self::$apiAuth;
+        $this->apiAuth = (config('api_auth')) ? $this->apiAuth : false;
 
         //前置钩子
         $request = Request::instance();
@@ -51,7 +51,7 @@ class BaseRest extends Common
         //设置响应类型
         $this->setRestType($request);
         //权限验证
-        if (self::$apiAuth) $this->auth($request);
+        if ($this->apiAuth) $this->auth($request);
 
         // 请求方式检测
         $method = strtolower($request->method());

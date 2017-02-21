@@ -15,6 +15,7 @@ use app\apilib\BaseRest;
 
 class Base extends BaseRest
 {
+    public    $apiAuth = true;
     // 允许访问的请求类型
     protected $restMethodList = 'get|post|put|delete|patch|head|options';
     //业务错误码的映射表
