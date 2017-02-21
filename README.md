@@ -154,7 +154,7 @@ composer install
 |false|true|认证关闭|
 
 
-###默认用户
+### 默认用户
 
 |名称|keys|value|必须|
 |:---:|:---:|:---:|:---:|
@@ -163,7 +163,9 @@ composer install
 |加密秘钥|secret|qwekjznc120cnsdkjhad|true|
 |权限列表|authorization|test/Test/init,|true|
 
->可以根据 $client_id 改写
+可以根据 $client_id 改写
+
+
 ```
  /**
      * 获取客户端信息
@@ -184,8 +186,9 @@ composer install
 
 
 
-###获取[access_token](host/accessToken) 和  [refresh_token_token](host/refreshToken)
-* 地址是配置地址
+### 获取[access_token](host/accessToken) 和  [refresh_token_token](host/refreshToken)
+地址是配置地址
+
 
 
 |参数|必须|备注|默认值|
@@ -200,20 +203,29 @@ composer install
 accessToken?client_id=11111111&time=1487664463&sign=709639d7a24142d279ac34d8458ad5af&grant_type=client_credentials
 ```
  
-###请求接口 
- headers  添加 "Authorization":"token [上一步获得的access_token]()"
+ 
+
+### 请求接口 
+
+
+headers  添加 "Authorization":"token [上一步获得的access_token]()"
   
 ![headers添加Authorization](./doc/images/9.png)
 
 
 
-##开发文档参考
+
+
+## 开发文档参考
+
 
  - [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
  - [restfulApi设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
  - [OAuth 2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
  
-##开发工具推荐
+ 
+
+## 开发工具推荐
  - IDE PHPSTORM
  - 模拟请求 Postman
 
