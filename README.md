@@ -28,7 +28,7 @@ apilib
 ##安装
 
 ```
-git cline 
+git clone 
     
 composer install
 ```
