@@ -16,6 +16,7 @@ return [
     //获取认证信息
     'accessToken' => 'test/AccessToken/accessToken',
     'refreshToken' => 'test/AccessToken/refreshToken',
+    'getServerTime' => 'test/AccessToken/getServerTime',
 
     '[v1]' => [
         'test' => ['test/Test/init',],

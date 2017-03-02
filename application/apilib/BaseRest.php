@@ -17,7 +17,7 @@ class BaseRest extends Common
 {
 
     //是否权限验证
-    public  $apiAuth = false;
+    public $apiAuth = false;
 
     //业务错误码的映射表
     public $errMap = [
@@ -52,15 +52,8 @@ class BaseRest extends Common
         $this->setRestType($request);
         //权限验证
         if ($this->apiAuth) $this->auth($request);
-
         // 请求方式检测
-        $method = strtolower($request->method());
-        if (false === stripos($this->restMethodList, $method)) {
-            $this->setResponseArr(403, 'not method!');
-            $this->notMethod();
-        }
-
-        $this->method = $method;
+        $this->method = strtolower($request->method());
     }
 
     /**
@@ -70,8 +63,53 @@ class BaseRest extends Common
      */
     public function init(Request $request)
     {
+        // 判断接口是否允许该方式接口
+        if (false === stripos($this->restMethodList, $this->method)) {
+            $this->setResponseArr(403, 'not method!');
+            return $this->notMethod();
+        }
         $action = $this->method . 'Response';
         return $this->$action($request);
+    }
+
+    /**
+     * 参数规则
+     * @name 字段名称
+     * @type 类型
+     * @require 是否必须
+     * @default 默认值
+     * @desc 说明
+     * @return array
+     */
+    public static function getRules()
+    {
+        return [
+            'all' => [
+
+            ],
+            'get' => [
+
+            ],
+            'post' => [
+
+            ],
+            'put' => [
+
+            ],
+            'delete' => [
+
+            ],
+            'patch' => [
+
+            ],
+            'head' => [
+
+            ],
+            'options' => [
+
+            ],
+        ];
+
     }
 
     /**
@@ -83,6 +121,7 @@ class BaseRest extends Common
     {
         $BaseAuth = new BaseAuth();
         if ($BaseAuth->auth($request) == false) {
+            $this->errCode = $BaseAuth->error;
             throw new HttpResponseException($this->setResponseArr($this->errCode, 'authentication Failed')->response('', '', 403));
         } else {
             return true;

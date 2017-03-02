@@ -21,8 +21,6 @@ use app\apilib\BaseRest;
 class Base extends BaseRest
 {
 
-    // 允许访问的请求类型
-    protected $restMethodList = 'get|post|put|delete|patch|head|options';
     //业务错误码的映射表
     public $errMap = [
         0 => 'success',//没有错误

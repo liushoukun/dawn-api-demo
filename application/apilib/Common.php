@@ -24,7 +24,7 @@ class Common extends Rest
     // 当前资源类型
     protected $type;
     // 允许访问的请求类型
-    protected $restMethodList = 'get|post|put|delete|patch|head|options';
+    public  $restMethodList = 'get|post|put|delete|patch|head|options';
     //默认请求类型
     protected $restDefaultMethod = 'get';
     //允许响应的资源类型
@@ -45,6 +45,21 @@ class Common extends Rest
     public $data;
     //数据集合
     public $responseData;
+    /**
+     * 字段类型
+     * @var array
+     */
+    public static $typeMaps = [
+        'string'    => '字符串',
+        'int'       => '整型',
+        'float'     => '浮点型',
+        'boolean'   => '布尔型',
+        'date'      => '日期',
+        'array'     => '数组',
+        'fixed'     => '固定值',
+        'enum'      => '枚举类型',
+        'object'    => '对象',
+    ];
 
     public function __construct()
     {
