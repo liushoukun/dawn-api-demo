@@ -21,6 +21,7 @@ restful风格的API，集API请求处理，权限认证，自动生成文档等�
  - [PHP5.4+]()
  - [ThinkPHP5.0](https://github.com/top-think/think) 基础框架
  - [RandomLib](https://github.com/ircmaxell/RandomLib) 用于生成随机数和字符串的库
+ - [Hadmin](https://git.oschina.net/liushoukun/hadmin.git) hAdmin是一个免费的后台管理模版,该模版基于bootstrap与jQuery制作，集成了众多常用插件，基本满足日常后台需要,修改时可根据自身需求;
  
 
 ## 目录结构
@@ -43,9 +44,11 @@ apilib
 ## 安装
 
 ```
-git clone 
-    
+git clone  https://git.oschina.net/liushoukun/restfulapi-tp5.git
 composer install
+#如果要使用生成文档 需要在public/static/ 下 安装hadmin
+cd /public/static/
+git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
 ```
 ## 使用
 
