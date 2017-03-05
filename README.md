@@ -178,11 +178,13 @@ public $restMethodList = 'get|post';
 public    $apiAuth = true;
 ```
  - 具体接口可覆盖
+ 
     
 ```php
 //是否开启权限认证
 public    $apiAuth = false;
 ```
+
 
 |配置(api_auth)|类($apiAuth)|效用|
 |:---:|:---:|:---:|
@@ -235,9 +237,12 @@ public    $apiAuth = false;
 |sign|true|签名md5(md5(client_id + time + secret))||
 |grant_type|false|认证类型| client_credentials 或 refresh_token |
 
+
 ```html
 /oauth/accessToken?client_id=11111111&time=1488685451&sign=b1df6b78bb099f8d7f0f1dc4ea3be1fe&grant_type=client_credentials
 ```
+
+
 ![获取令牌](./public/doc/images/demo9.png)
  
  
@@ -258,6 +263,8 @@ headers  添加 "Authorization":"token [上一步获得的access_token]()"
 > 访问[/demo/Doc/apiList](/demo/Doc/apiList)
  
 2.配置文档显示目录
+
+
 ```php
     /**
      * 获取文档
@@ -270,7 +277,10 @@ headers  添加 "Authorization":"token [上一步获得的access_token]()"
         return $apiList;
     }
 ```
+
+
 >可以改写次方法以存储以无限极的方式，为了方便我采用的是配置方式
+
 
 tp5 增加额外配置  创建application/extra/api_doc.php 文件
 
@@ -296,7 +306,11 @@ return [
 
 
 3.具体接口文档配置
+
+
 - 接口描述部分(类文件的注释)
+
+
 ```php
 /**
  * Class User
@@ -307,8 +321,9 @@ return [
  * @readme /doc/md/user.md
  */
 class User extends Base{}
-
 ```
+
+
 |参数|必须|备注|作用|
 |:---:|:---:|:---:|:---:|
 |title|true|接口标题|显示列表名称|
@@ -316,11 +331,17 @@ class User extends Base{}
 |desc|true|接口描述|显示描述|
 |version|false|版本号|版本号|
 |readme|false|markdown文档|可以编写信息文档|
+
+
 ![ClassDoc](./public/doc/images/demo12.png)
 
 
 - 具体接口文档
+
+
  1. 接口描述信息(注释填写)
+ 
+ 
 ```php
        /**
         * @title 获取用户信息
@@ -330,6 +351,8 @@ class User extends Base{}
       public function getResponse(\think\Request $request){}
 
 ```
+
+
 |参数|必须|备注|作用|
 |:---:|:---:|:---:|:---:|
 |title|true|接口标题|显示列表名称|
@@ -337,6 +360,8 @@ class User extends Base{}
 |readme|false|markdown文档|可以编写信息文档|
 
    2.请求参数
+   
+   
 ```php
     /**
      * 参数规则
@@ -368,21 +393,31 @@ class User extends Base{}
         return array_merge(parent::getRules(),$rules);
     }
 ```
+
+
 ![data](./public/doc/images/demo14.png)
   
 
    3. 返回参数(注释填写)
+   
+   
 ```php
      * @return int id ID
      * @return string username 错误信息
      * @return int age 年龄
 ```
+
+
 |参数|必须|备注|
 |:---:|:---:|:---:|
 |第一个参数|true|类型|
 |第二个参数|true|参数名|
 |第三个参数|true|参数说明|
+
+
 >类型填写规则
+
+
 ```php
 'string'    => '字符串',
 'int'       => '整型',
