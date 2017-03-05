@@ -173,10 +173,14 @@ public $restMethodList = 'get|post';
 
  4.控制器开关 
   - 业务基础类设置开启
+  
+  
 ```php
 //是否开启权限认证
 public    $apiAuth = true;
 ```
+
+
  - 具体接口可覆盖
  
     
