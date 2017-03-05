@@ -13,13 +13,18 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
-    //获取认证信息
-    'accessToken' => 'test/AccessToken/accessToken',
-    'refreshToken' => 'test/AccessToken/refreshToken',
-    'getServerTime' => 'test/AccessToken/getServerTime',
-
     '[v1]' => [
-        'test' => ['test/Test/init',],
+        'user' => ['demo/User/init',], //用户模块接口
     ],
+
+    //认证
+    '[oauth]' => [
+        'accessToken' => ['demo/Auth/accessToken',],//获取令牌
+        'refreshToken' => ['demo/Auth/refreshToken',],//刷新令牌
+        'getServerTime' => ['demo/Auth/getServerTime',],//获取服务器时间戳
+    ],
+
+
+
 
 ];

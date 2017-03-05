@@ -24,7 +24,7 @@ class Test extends Base
 {
     public $apiAuth = false;
     // 允许访问的请求类型
-    public $restMethodList = 'get|post';
+    public $restMethodList = 'get|post|';
 
     /**
      * 请求数据规则
@@ -45,6 +45,7 @@ class Test extends Base
     /**
      * @title 获取测试信息
      * @desc get的描述
+     * @readme /api/test.md
      * @param Request $request
      * @return string title 标题
      * @return string username 用户名
@@ -58,10 +59,11 @@ class Test extends Base
     /**
      * @title 创建测试信息
      * @desc post的描述
+     * @readme /api/test.md
      * @param Request $request
      * @return int id ID
      * @return string id2 ID2
-     * @readme /api/test.md
+     *
      */
     public function postResponse(Request $request)
     {
