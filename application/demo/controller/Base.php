@@ -14,7 +14,7 @@ class Base extends BaseRest
 {
 
     //是否开启权限认证
-    public    $apiAuth = true;
+    public    $apiAuth = false;
 
 
 }
