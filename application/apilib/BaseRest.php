@@ -79,13 +79,14 @@ class BaseRest extends Common
      * @require 是否必须
      * @default 默认值
      * @desc 说明
+     * @range 范围
      * @return array
      */
     public static function getRules()
     {
         return [
             'all' => [
-
+                //全部
             ],
             'get' => [
 
@@ -138,10 +139,14 @@ class BaseRest extends Common
     // |====================================
     // |具体响应子类重写
     // |====================================
+
     /**
-     * get的响应
+     * @title GET的响应
+     * @desc GET的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function getResponse(Request $request)
     {
@@ -149,9 +154,12 @@ class BaseRest extends Common
     }
 
     /**
-     * post的响应
+     * @title POST的响应
+     * @desc POST的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function postResponse(Request $request)
     {
@@ -159,9 +167,12 @@ class BaseRest extends Common
     }
 
     /**
-     * put的响应
+     * @title PUT的响应
+     * @desc PUT的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function putResponse(Request $request)
     {
@@ -169,9 +180,12 @@ class BaseRest extends Common
     }
 
     /**
-     * delete的响应
+     * @title DELETE的响应
+     * @desc DELETE的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function deleteResponse(Request $request)
     {
@@ -179,9 +193,12 @@ class BaseRest extends Common
     }
 
     /**
-     * patch的响应
+     * @title PATCH的响应
+     * @desc PATCH的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function patchResponse(Request $request)
     {
@@ -189,9 +206,12 @@ class BaseRest extends Common
     }
 
     /**
-     * head的响应
+     * @title HEAD的响应
+     * @desc HEAD的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function headResponse(Request $request)
     {
@@ -199,9 +219,12 @@ class BaseRest extends Common
     }
 
     /**
-     * options的响应
+     * @title OPTIONS的响应
+     * @desc OPTIONS的描述
+     * @readme /doc/md/method.md
      * @param Request $request
-     * @return mixed
+     * @return string message 错误信息
+     * @return int errCode 错误号
      */
     public function optionsResponse(Request $request)
     {

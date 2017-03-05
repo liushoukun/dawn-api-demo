@@ -153,8 +153,7 @@
                     {/case}
                     {case value="post"}
                         <span class="label label-warning">POST</span>
-                    {$vo.title}
-                        <h5><strong>{$vo.title}  </strong></h5>
+                         <h5><strong>{$vo.title}  </strong></h5>
                     {/case}
                     {case value="put"}
                         <span class="label label-info">PUT</span>
@@ -342,8 +341,8 @@
 
 
             (function () {
-                var dataTableUrl =  "{:url('tableData',['module'=>$classDoc.module,'controller'=>$classDoc.controller,'method'=>$k,'dataType'=>'data'])}";
-                var returnTableUrl =  "{:url('tableData',['module'=>$classDoc.module,'controller'=>$classDoc.controller,'method'=>$k,'dataType'=>'return'])}";
+                var dataTableUrl =  "{:url('tableData',['id'=>$classDoc.id,'method'=>$k,'dataType'=>'data'])}";
+                var returnTableUrl =  "{:url('tableData',['id'=>$classDoc.id,'method'=>$k,'dataType'=>'return'])}";
                 $('#dataTable-{$k}').bootstrapTable({
                     url:dataTableUrl,
                     search: true,

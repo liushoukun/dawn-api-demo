@@ -91,8 +91,11 @@ class BaseDoc extends Common
         }
         $classDoc['module'] = $module;
         $classDoc['controller'] = $controller;
+        $classDoc['id'] = $id;
+
         //获取请求列表文档
         $methodDoc = self::getMethodListDoc($className);
+
         //模板位置
         $apiInfoHtmlPath = APP_PATH . 'apilib' . DS . 'view' . DS . 'apiInfo.tpl';
         $apiInfoHtmlPath = (Config::get('apiInfoHtmlPath')) ? Config::get('apiInfoHtmlPath') : $apiInfoHtmlPath;

@@ -229,7 +229,7 @@ class BaseAuth extends Common
             'client_name' => 'test',//客户端账户名称
             'client_id' => '11111111',//客户端账户id
             'secret' => 'qwekjznc120cnsdkjhad',  //加密秘钥
-            'authorization_list' => 'test/Test/init,',//权限列表
+            'authorization_list' => 'demo/User/init,',//权限列表
         ];
     }
 
