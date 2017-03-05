@@ -258,6 +258,8 @@ headers  添加 "Authorization":"token [上一步获得的access_token]()"
 >可以改写次方法以存储以无限极的方式，为了方便我采用的是配置方式
 
 tp5 增加额外配置  创建application/extra/api_doc.php 文件
+
+
 ```php
 return [
     '1' => ['name' => '测试文档', 'id' => '1', 'parent' => '0', 'module' => '', 'controller' => '','readme' =>''],//下面有子列表为一级目录
@@ -265,6 +267,8 @@ return [
     '3' => ['name' => '用户接口', 'id' => '3', 'parent' => '1', 'module' => 'demo', 'controller' => 'User', 'readme' => ''],//User接口文档
 ];
 ```
+
+
 |参数|必须|备注|作用|
 |:---:|:---:|:---:|:---:|
 |name|true|接口列表名称|显示列表名称|
