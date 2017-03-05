@@ -50,6 +50,8 @@ composer install
 cd /public/static/
 git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
 ```
+
+
 ## 使用
 
  1. 新建demo 模块
@@ -61,19 +63,33 @@ git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
  3. 创建一个用户接口 User
  
 - 添加路由 action需要填写init(会进行调用)
+
+
 ```php
 '[v1]' => [
         'user' => ['demo/User/init',], //用户模块接口
     ],
 ```
+
+
 - 设置允许访问的方式
+
+
 ```php
 // 允许访问的请求类型
 public $restMethodList = 'get|post';
 ```
+
+
 - 重写 获取用户(get),post(新增用户)的相应方法 
+
+
 > 因为方法的描述信息会设计到文档生,可以拷贝父级方法的描述.推荐使用phpstorm的 [ctrl + o](https://segmentfault.com/a/1190000004225643) 快捷键,点击添加注释；
+
+
 ![重写](./public/doc/images/demo2.png)
+
+
 ```php
    /**
      * @title 获取用户信息
@@ -88,7 +104,6 @@ public $restMethodList = 'get|post';
         //返回一个用户信息
         return $this->sendSuccess(['username' => 'api', 'age' => 1, 'id' => 1]);
     }
-
     /**
      * @title 添加用户信息
      * @desc 添加用户信息
