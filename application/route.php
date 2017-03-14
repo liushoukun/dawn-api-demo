@@ -24,6 +24,11 @@ return [
         'getServerTime' => ['demo/Auth/getServerTime',],//获取服务器时间戳
     ],
 
+    '[v1]' => [
+        'test' => ['test/Index/restful',], //用户模块接口
+    ],
+    'accessToken'=>'test/Index/accessToken',
+
 
 
 
