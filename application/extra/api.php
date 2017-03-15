@@ -8,7 +8,6 @@
 // +----------------------------------------------------------------------
 
 return [
-
-//    'ss'=>'ss',
-    'api_auth' => true
+    'api_auth' => true,  //是否开启授权认证
+    'auth_class' => [\app\test\auth\TestAuth::class,], //授权认证类数组配置
 ];

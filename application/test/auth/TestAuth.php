@@ -4,27 +4,26 @@
 // +----------------------------------------------------------------------
 // | Company: YG | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/9 15:18
 // +----------------------------------------------------------------------
-// | TITLE: this to do?
+// | TITLE: 测试的基础验证
 // +----------------------------------------------------------------------
 namespace app\test\auth;
 
-use liushoukun\api\contract\AuthContract;
+use liushoukun\api\auth\Basic;
 use think\Request;
 
-class TestAuth implements AuthContract
+class TestAuth extends Basic
 {
+
+
     /**
-     * 认证授权 通过用户信息和路由
+     * 获取用户信息后 验证权限,
      * @param Request $request
      * @return bool
      */
-    public function authenticate(Request $request)
+    public function certification(Request $request)
     {
-        return false;
+        return  ($this->username == 'test' && $this->password == 'test') ? true : false;
     }
-
-
-
 
 
 }
