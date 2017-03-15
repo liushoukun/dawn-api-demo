@@ -27,7 +27,8 @@ return [
     '[v1]' => [
         'test' => ['test/Index/restful',], //用户模块接口
     ],
-    'accessToken'=>'test/Index/accessToken',
+//    'accessToken'=>'test/Index/accessToken',
+    'accessToken'=>'test/Oauth/accessToken',
 
 
 

@@ -1,12 +1,12 @@
 @startuml
 
-Client -> AuthServer:1.GET Authentication Token Request
-AuthServer --> Client:2.Return Token Response
+Client -> AuthorizationServer:1.GET Authentication Token Request
+AuthorizationServer --> Client:2.Return Token Response
 
-Client -> ApiServer:3. Api Request
-ApiServer --> Client:4. Return Data Response
+Client -> ResourceServer:3. Api Request
+ResourceServer --> Client:4. Return Data Response
 
-Client -> AuthServer:5. Refresh Authentication Token Request
-AuthServer --> Client:6. Return Token Response
+Client -> AuthorizationServer:5. Refresh Authentication Token Request
+AuthorizationServer --> Client:6. Return Token Response
 
 @enduml
