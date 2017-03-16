@@ -9,5 +9,5 @@
 
 return [
     'api_auth' => true,  //是否开启授权认证
-    'auth_class' => [\app\test\auth\TestAuth::class,], //授权认证类数组配置
+    'auth_class' => [\app\test\controller\Oauth::class], //授权认证类数组配置
 ];

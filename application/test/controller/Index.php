@@ -23,7 +23,8 @@ class Index extends Api
     public function accessToken()
     {
 
-        return Response::create(["access_token" => "2YotnFZFEjr1zCsicMWpAA",
+        return Response::create(
+            ["access_token" => "2YotnFZFEjr1zCsicMWpAA",
             "token_type" => "example",
             "expires_in" => 3600,
             "example_parameter" => "example_value"],'json');

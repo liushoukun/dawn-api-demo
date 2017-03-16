@@ -24,14 +24,29 @@ class Oauth extends \liushoukun\api\auth\OAuth
             $this->getClient($request);
         } catch (UnauthorizedException $e) {
             //错误则返回给客户端
-            return $this->sendError(401, $e->getMessage(), 401, [],$e->getHeaders());
+            return $this->sendError(401, $e->getMessage(), 401, [], $e->getHeaders());
         }
 
         //校验信息
         $this->client_id;
-        dump($this->client_id);
-        die();
+        $options =  ["access_token" => "2YotnFZFEjr1zCsicMWpAA",
+            "token_type" => "example",
+            "expires_in" => 3600,
+            "example_parameter" => "example_value"];
+        return $this->sendSuccess([],'success',200,[],$options);
 
     }
+
+    /**
+     * 获取用户信息后 验证权限
+     * @return mixed
+     */
+    public function certification()
+    {
+
+        dump( $this->access_token);
+        die();
+    }
+
 
 }
