@@ -4,16 +4,14 @@
 // +----------------------------------------------------------------------
 // | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/15 23:36
 // +----------------------------------------------------------------------
-// | TITLE: this to do?
+// | TITLE: 简单 oauth
 // +----------------------------------------------------------------------
 
 namespace app\test\controller;
 
 
 use liushoukun\api\exception\UnauthorizedException;
-use think\Exception;
 use think\Request;
-use think\Response;
 
 class Oauth extends \liushoukun\api\auth\OAuth
 {
@@ -26,9 +24,11 @@ class Oauth extends \liushoukun\api\auth\OAuth
             //错误则返回给客户端
             return $this->sendError(401, $e->getMessage(), 401, [], $e->getHeaders());
         }
-
         //校验信息
         $this->client_id;
+        $this->secret;
+
+
         $options =  ["access_token" => "2YotnFZFEjr1zCsicMWpAA",
             "token_type" => "example",
             "expires_in" => 3600,
@@ -43,9 +43,11 @@ class Oauth extends \liushoukun\api\auth\OAuth
      */
     public function certification()
     {
-
-        dump( $this->access_token);
+        $this->access_token;
+        //dump( $this->access_token);
+        return true;
         die();
+
     }
 
 
