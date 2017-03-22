@@ -46,8 +46,6 @@ class Oauth extends \liushoukun\api\auth\OAuth
         $this->access_token;
         //dump( $this->access_token);
         return true;
-        die();
-
     }
 
 

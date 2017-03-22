@@ -15,6 +15,7 @@ class Doc extends \liushoukun\api\facade\Doc
 {
     public function index()
     {
+        echo  123;
     }
 
 }
