@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 namespace app\test\auth;
 
-use liushoukun\api\auth\Basic;
+use DawnApi\auth\Basic;
 use think\Request;
 
 class TestAuth extends Basic

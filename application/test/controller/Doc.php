@@ -11,7 +11,7 @@
 namespace app\test\controller;
 
 
-class Doc extends \liushoukun\api\facade\Doc
+class Doc extends \DawnApi\facade\Doc
 {
     public function index()
     {

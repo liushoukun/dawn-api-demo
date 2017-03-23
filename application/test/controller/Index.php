@@ -11,7 +11,7 @@
 namespace app\test\controller;
 
 
-use liushoukun\api\facade\Api;
+use DawnApi\facade\Api;
 use think\Request;
 use think\Response;
 
@@ -65,6 +65,10 @@ class Index extends Api
 
     public $apiAuth = true;
 
+    public function index()
+    {
+        echo 123;
+    }
 
     /**
      * @title 获取用户信息

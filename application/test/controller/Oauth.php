@@ -10,10 +10,10 @@
 namespace app\test\controller;
 
 
-use liushoukun\api\exception\UnauthorizedException;
+use DawnApi\exception\UnauthorizedException;
 use think\Request;
 
-class Oauth extends \liushoukun\api\auth\OAuth
+class Oauth extends \DawnApi\auth\OAuth
 {
     public function accessToken(Request $request)
     {

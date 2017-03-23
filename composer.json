@@ -20,8 +20,7 @@
         "topthink/framework": "^5.0",
         "ircmaxell/random-lib": "^1.2",
         "symfony/var-dumper": "^2.8",
-        "firebase/php-jwt": "^4.0",
-        "liushoukun/api": "dev-master"
+        "liushoukun/dawn-api": "dev-master"
     },
     "extra": {
         "think-path": "thinkphp"
