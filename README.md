@@ -1,123 +1,88 @@
-Restful Api 
+Dawn-Api 
 ===============
 
 [Toc]
 
 ## 说明
-
-restful风格的API，集API请求处理，权限认证，自动生成文档等功能；
+thinkphp5编写的restful风格的API，集API请求处理，权限认证，自动生成文档等功能；
 
  - restful风格处理请求
- > 每个接口对于一个控制器，method对应[method]Response方法响应
+ > 每个接口对于一个控制器，method对应[method]方法响应
 
  - 权限认证
- > 以access_token进行权限认证
+ > Basic,Oauth Client Credentials Grant
  
  - 文档生成
  > 简洁，优雅，不需要额外的文档工具;
  
  
-## 相关依赖
- - [PHP5.4+]()
- - [ThinkPHP5.0](https://github.com/top-think/think) 基础框架
- - [RandomLib](https://github.com/ircmaxell/RandomLib) 用于生成随机数和字符串的库
- - [Hadmin](https://git.oschina.net/liushoukun/hadmin.git) hAdmin是一个免费的后台管理模版,该模版基于bootstrap与jQuery制作，集成了众多常用插件，基本满足日常后台需要,修改时可根据自身需求;
- 
-
-## 目录结构
-
-
-~~~
-apilib
-├─application           应用目录
-│  ├─apilib             apilib目录
-│  │  ├─Common.php      公共类库基础Rest
-│  │  ├─BaseRest.php    Restful风格基础类
-│  │  ├─BaseAuth.php    认证基础类
-│  │  ├─BaseDoc.php     文档生成展示
-│  │  ├─Behavior.php    行为类
-│  │  └─ ...            
-
-~~~
-
-
 ## 安装
+- 如果想在你的TP5项目中使用,那么可以直接使用
+```
+composer require liushoukun/dawn-api
+```
+- 如果是新项目先要创建tp5项目,然后再require
 
 ```
-git clone  https://git.oschina.net/liushoukun/restfulapi-tp5.git
-composer install
-#如果要使用生成文档 需要在public/static/ 下 安装hadmin
+composer create-project topthink/think api  --prefer-dist
+composer require liushoukun/dawn-api
+```
+- 如果要使用生成文档 需要在public/static/ 下 安装hadmin
+```
 cd /public/static/
-git clone  https://git.oschina.net/liushoukun/hadmin.git
+git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
 ```
-
 
 ## 使用
 
  1. 新建demo 模块
- 2. 业务基础类继承 BaseRest
+ 2. 创建业务基础类 Base 继承 Api 
  
-
-![BaseRest](./public/doc/images/demo1.png)
-
- 3. 创建一个用户接口 User
+ 3. 创建一个用户接口 User 继承 Base
  
-- 添加路由 action需要填写init(会进行调用)
-
-
+ 4. 添加路由 action需要填写restful(会进行调用)
+ > /v1/user 
 ```php
-'[v1]' => [
-        'user' => ['demo/User/init',], //用户模块接口
+  '[v1]' => [
+        'user' => ['demo/User/restful',], //用户模块接口
     ],
 ```
 
 
-- 设置允许访问的方式
-
+ 5. 设置允许访问的方式
 
 ```php
 // 允许访问的请求类型
-public $restMethodList = 'get|post';
+public $restMethodList ='get|post|delete';
 ```
 
-
-- 重写 获取用户(get),post(新增用户)的相应方法 
-
-
-> 因为方法的描述信息会设计到文档生,可以拷贝父级方法的描述.推荐使用phpstorm的 [ctrl + o](https://segmentfault.com/a/1190000004225643) 快捷键,点击添加注释；
-
-
-![重写](./public/doc/images/demo2.png)
+- 获取用户(get),post(新增用户)的相应方法 
 
 
 ```php
-   /**
-     * @title 获取用户信息
-     * @desc 获取用户信息
-     * @readme /api/md/method.md
-     * @param \think\Request $request
-     * @return string message 错误信息
-     * @return int errCode 错误号
-     */
-    public function getResponse(\think\Request $request)
-    {
-        //返回一个用户信息
-        return $this->sendSuccess(['username' => 'api', 'age' => 1, 'id' => 1]);
-    }
-    /**
-     * @title 添加用户信息
-     * @desc 添加用户信息
-     * @readme /api/md/method.md
-     * @param \think\Request $request
-     * @return string message 错误信息
-     * @return int errCode 错误号
-     */
-    public function postResponse(\think\Request $request)
-    {
-        //添加失败
-        return $this->sendError(5001, '添加错误');
-    }
-
+  /**
+      * get
+      *
+      * @param Request $request
+      * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\Xml
+      */
+     public function get(Request $request)
+     {
+         // todo find
+         return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1]);
+     }
+ 
+     /**
+      * post
+      *
+      * @param Request $request
+      * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Xml
+      */
+     public function post(Request $request)
+     {
+         //todo create
+         return $this->sendError(400, '用户名不能为空');
+     }    
 ```
 
  
@@ -125,70 +90,67 @@ public $restMethodList = 'get|post';
  
   - GET的请求(获取用户信息)
   
-  ![GET的响应](./public/doc/images/demo3.png)
+  ![GET的响应](./public/doc/images/get.png)
  
  - POST的请求(添加用户)
  
-  ![POST的响应](./public/doc/images/demo4.png)
+  ![POST的响应](./public/doc/images/post.png)
 
- - 其让未允许的响应
+ - PUT 让未允许的响应
  
-![其让未允许的响应](./public/doc/images/demo6.png)
+![让未允许的响应](./public/doc/images/put.png)
 
-
-## 开启权限
-  认证
-![认证](./public/doc/images/demo7.png)
-
-> 1. 客户端向认证服务器发起请求
-> 2. 认证服务器确认用户返回access_token(客户端存储,并且有过期时间为7200s)
-> 3. 客户端向携带access_token向接口服务器发起请求
-> 4. 接口服务器认证access_token，响应
-> 5. access_token过期可以向认证服务器refreshToken
-> 6.同2
-
-本代码认证服务器和接口服务器共用,服务器存储access_token信息采用缓存;
-
-
- 1. 新建一个继承 BaseAuth 的控制器
+ - DELETE 可以方法问题，但没有编写方法执行 _empty方法,如有需要可改写
  
-![权限](./public/doc/images/demo8.png)
+![DELETE的响应](./public/doc/images/delete.png)
 
- 2. 添加路由
+## 开启授权认证
+
+ 1.添加配置 认证总开关
+ 
+```
+ 'api_auth' => true,  //是否开启授权认证
+```
+
+ 2.权限类 实现AuthContract 接口 
+ 
+  -  authenticate 接口认证返回true则通过，否则不通过
+  
+  - getUser 获取用户信息，Api控制可以调用
+```php
+self::$app['auth']->getUser();
+```
 
 ```php
-//认证
-'[oauth]' => [
-    'accessToken' => ['demo/Auth/accessToken',],//获取令牌
-    'refreshToken' => ['demo/Auth/refreshToken',],//刷新令牌
-    'getServerTime' => ['demo/Auth/getServerTime',],//获取服务器时间戳
-],
+ /**
+     * 认证授权通过客户端信息和路由等
+     * 如果通过返回true
+     * @param Request $request
+     * @return bool
+     */
+    public function authenticate(Request $request)
+    {
+        // TODO: Implement authenticate() method.
+        return true;
+    }
+
+    /**
+     * 获取用户信息 接口里可以直接获取用户信息
+     * @return mixed
+     */
+    public function getUser()
+    {
+       return ['app_id'=>'111','name'=>'dawn-api'];
+    }
+
 ```
 
- 3.添加配置 认证总开关
- 
-```
-   'api_auth' => true,//是否开启API认证
-```
-
- 4.控制器开关 
-  - 业务基础类设置开启
-  
+ 3. 接口类开启授权认证
   
 ```php
-//是否开启权限认证
+//是否开启授权认证
 public    $apiAuth = true;
 ```
-
-
- - 具体接口可覆盖
- 
-    
-```php
-//是否开启权限认证
-public    $apiAuth = false;
-```
-
 
 |配置(api_auth)|类($apiAuth)|效用|
 |:---:|:---:|:---:|
@@ -197,77 +159,110 @@ public    $apiAuth = false;
 |false|false|认证关闭|
 |false|true|认证关闭|
 
+ 4. 配置验证类
+```php
+   'auth_class' => \app\demo\auth\Auth::class, //授权认证类
+```
 
- 5. 默认用户
 
-|名称|keys|value|必须|
-|:---:|:---:|:---:|:---:|
-|客户端账户名称|client_name|test|false|
-|客户端账户id|client_id|11111111|true|
-|加密秘钥|secret|qwekjznc120cnsdkjhad|true|
-|权限列表|authorization|demo/User/init,|true|
-
-可以根据 $client_id 改写
+5. 改写get方法
 
 ```php
-     /**
-      * 获取应用信息
-      * @param $client_id 应用ID
-      * @return array
-      */
-     protected function getClient($client_id)
-     {
-         return [
-             'client_name' => 'test',//客户端账户名称
-             'client_id' => '11111111',//客户端账户id
-             'secret' => 'qwekjznc120cnsdkjhad',  //加密秘钥
-             'authorization_list' => 'demo/User/init,',//权限列表
-         ];
-     }
-
+    /**
+     * get
+     *
+     * @param Request $request
+     * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\Xml
+     */
+    public function get(Request $request)
+    {
+        $user = self::$app['auth']->getUser();
+        // todo find
+        return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1, 'user' => $user]);
+    }
 ```
 
+> 可以获取到用户信息
+
+![DELETE的响应](./public/doc/images/get1.png)
+
+> 当然简单实现了Basic,Oauth Client Credentials Grant认证
+
+- Oauth Client Credentials Grant
+ 1. 配置验证类
+```php
+   'auth_class' => \app\demo\auth\Auth::class, //授权认证类
+```
+ 2. 获取access_token
+ - 编写可访问的方法获取access_token
+```php
+namespace app\demo\controller;
 
 
-6 获取[access_token](host/oauth/accessToken) 和  [refresh_token_token](host/oauth/refreshToken)
-地址是配置地址
+use app\demo\auth\OauthAuth;
+use think\Request;
 
+class Auth
+{
+    public function accessToken()
+    {
+        $request = Request::instance();
+        $OauthAuth = new OauthAuth();
+        return $OauthAuth->accessToken($request);
+    }
 
-
-|参数|必须|备注|默认值|
-|:---:|:---:|:---:|:---:|
-|client_id|true|客户端ID||
-|time|true|请求时间||
-|sign|true|签名md5(md5(client_id + time + secret))||
-|grant_type|false|认证类型| client_credentials 或 refresh_token |
-
-
-```html
-/oauth/accessToken?client_id=11111111&time=1488685451&sign=b1df6b78bb099f8d7f0f1dc4ea3be1fe&grant_type=client_credentials
+}
+```
+ - 配置路由
+```php
+ 'accessToken'=>'demo/Auth/accessToken',//Oauth认证
 ```
 
+按需改写获取客户端信息
+```php
 
-![获取令牌](./public/doc/images/demo9.png)
- 
- 
+    /**
+     * 返回用户信息
+     * @return array
+     */
+    public static function getUserInfo()
+    {
+        return [
+            'client_id' => '20882088',//app_id
+            'secret' => 'nGk5R2wrnZqQ02bed29rjzax1QWRIu1O',
+            'name' => 'test_client'];
+    }
+```
 
-7. 请求接口 
+ - 请求获取
+  /accessToken?client_id=20882088&secret=nGk5R2wrnZqQ02bed29rjzax1QWRIu1O
+  或者
+  /accessToken 
+  headers Basic MjA4ODIwODg6bkdrNVIyd3JuWnFRMDJiZWQyOXJqemF4MVFXUkl1MU8=
 
+ ![accessToken](./public/doc/images/get_access_token.png)
 
-headers  添加 "Authorization":"token [上一步获得的access_token]()"
+3.请求接口
+ /v1/user?access_token=cxXpnNIdf4aSIQFjR8NYH91Uwsg8jzMZ
+
+![accessToken](./public/doc/images/auth.png)
+
+> 快捷方式利用postman
+![accessToken](./public/doc/images/auth1.png)
+![accessToken](./public/doc/images/auth2.png)
+![accessToken](./public/doc/images/auth3.png)
   
-![headers添加Authorization](./public/doc/images/demo10.png)
- 
-
 ## 自动生成文档
 
 1. 创建Doc文档显示控制器
-![Doc](./public/doc/images/demo11.png)
+    wiki 继承 DawnApi\facade\Doc;
 
-> 访问[/demo/Doc/apiList](/demo/Doc/apiList)
+2. 配置路由
+```php
+ 'wiki'=>'demo/Wiki/index',//文档
+```
  
-2.配置文档显示目录
-
+3.配置文档显示目录
 
 ```php
     /**
@@ -283,37 +278,33 @@ headers  添加 "Authorization":"token [上一步获得的access_token]()"
 ```
 
 
->可以改写次方法以存储以无限极的方式，为了方便我采用的是配置方式
-
+>可以改写次方法以存储以无限级的方式，为了方便采用的是配置方式
 
 tp5 增加额外配置  创建application/extra/api_doc.php 文件
 
 
 ```php
 return [
-    '1' => ['name' => '测试文档', 'id' => '1', 'parent' => '0', 'module' => '', 'controller' => '','readme' =>''],//下面有子列表为一级目录
-    '2' => ['name' => '获取权限', 'id' => '2', 'parent' => '1', 'module' => '', 'controller' => '', 'readme' => '/doc/md/auth.md'],//没有接口的文档，加载markdown文档
-    '3' => ['name' => '用户接口', 'id' => '3', 'parent' => '1', 'module' => 'demo', 'controller' => 'User', 'readme' => ''],//User接口文档
+    '1' => ['name' => '测试文档', 'id' => '1', 'parent' => '0', 'class'=>'','readme' =>''],//下面有子列表为一级目录
+    '2' => ['name' => '获取权限', 'id' => '2', 'parent' => '1', 'class'=>'','readme' => '/doc/md/auth.md'],//没有接口的文档，加载markdown文档
+    '3' => ['name' => '用户接口', 'id' => '3', 'parent' => '1', 'readme' => '','class'=>\app\test\controller\User::class],//User接口文档
 ];
 ```
-
+![wiki](./public/doc/images/wiki.png)
 
 |参数|必须|备注|作用|
 |:---:|:---:|:---:|:---:|
 |name|true|接口列表名称|显示列表名称|
 |id|true|主键|生成列表所用|
 |parent|true|生成列表所用|
-|module|true|模块名|用于生成具体接口文档|
-|controller|true|用于生成具体接口文档|
+|class|true|接口位置|用于生成具体接口文档|
 |readme|true|markdown|可以生成没有接口的文档，比如一些说明 module和controller为空,readme填文档路径|
-![ApiList](./public/doc/images/demo13.png)
 
 
 3.具体接口文档配置
 
 
 - 接口描述部分(类文件的注释)
-
 
 ```php
 /**
@@ -342,10 +333,8 @@ class User extends Base{}
 
 - 具体接口文档
 
-
  1. 接口描述信息(注释填写)
- 
- 
+
 ```php
        /**
         * @title 获取用户信息
@@ -445,7 +434,6 @@ class User extends Base{}
 
 
 ## 开发文档参考
-
 
  - [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
  - [restfulApi设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
