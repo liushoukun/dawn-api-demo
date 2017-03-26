@@ -30,7 +30,7 @@ composer require liushoukun/dawn-api
 - 如果要使用生成文档 需要在public/static/ 下 安装hadmin
 ```
 cd /public/static/
-git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
+git clone  https://git.oschina.net/liushoukun/hadmin.git
 ```
 
 ## 使用
