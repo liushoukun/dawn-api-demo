@@ -11,7 +11,7 @@ namespace app\test\auth;
 use DawnApi\auth\Basic;
 use think\Request;
 
-class TestAuth extends Basic
+class BasicAuth extends Basic
 {
 
 
@@ -23,6 +23,15 @@ class TestAuth extends Basic
     public function certification(Request $request)
     {
         return  ($this->username == 'test' && $this->password == 'test') ? true : false;
+    }
+
+    /**
+     * 获取用户信息
+     * @return mixed
+     */
+    public function getUser()
+    {
+        // TODO: Implement getUser() method.
     }
 
 

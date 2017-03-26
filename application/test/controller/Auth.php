@@ -2,14 +2,24 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// | Company: YG | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/10 10:17
+// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 10:32
 // +----------------------------------------------------------------------
 // | TITLE: this to do?
 // +----------------------------------------------------------------------
 
-return [
-    'api_auth' => true,  //是否开启授权认证
-//    'auth_class' => \app\demo\auth\Auth::class, //授权认证类
-    'auth_class' => \app\demo\auth\OauthAuth::class, //授权认证类
-    'api_debug'=>false,//是否开启调试
-];
+namespace app\test\controller;
+
+
+use app\test\auth\OauthAuth;
+use think\Request;
+
+class Auth
+{
+    public function accessToken()
+    {
+        $request = Request::instance();
+        $OauthAuth = new OauthAuth();
+        return $OauthAuth->accessToken($request);
+    }
+
+}

@@ -2,34 +2,28 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// |  User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/9 13:53
+// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 10:50
 // +----------------------------------------------------------------------
-// | TITLE: this to do?
+// | TITLE: 用户接口
 // +----------------------------------------------------------------------
-
 
 namespace app\test\controller;
 
-
-use DawnApi\facade\Api;
-use think\Request;
-use think\Response;
-
 /**
  * Class User
- * @title 用户接口
- * @url /v1/user
- * @desc  有关于用户的接口
+ * @title 用户接口标题
+ * @url  /v1/user
  * @version 1.0
  * @readme /doc/md/user.md
+ * @desc 这是一个接口案例说明
+ * @package app\test\controller
  */
-class Index extends Api
+class User extends Base
 {
-    // 允许访问的请求类型
-    public $restMethodList = 'get|post|puts';
 
+    public $restMethodList = 'get|post';
     /**
-     * 参数规则
+     * 参数规则 生成文档时需要
      * @name 字段名称
      * @type 类型
      * @require 是否必须
@@ -42,33 +36,27 @@ class Index extends Api
     {
         $rules = [
             //共用参数
-            'all'=>[
-                'time'=> ['name' => 'time', 'type' => 'int', 'require' => 'true', 'default' => '', 'desc' => '时间戳', 'range' => '',]
+            'all' => [
+                'time' => ['name' => 'time', 'type' => 'int', 'require' => 'true', 'default' => '', 'desc' => '时间戳', 'range' => '',]
             ],
 
-            'get'=>[
+            'get' => [
                 'id' => ['name' => 'id', 'type' => 'int', 'require' => 'true', 'default' => '', 'desc' => '用户id', 'range' => '',]
             ],
-            'post'=>[
+            'post' => [
                 'username' => ['name' => 'username', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '用户名', 'range' => '',],
                 'age' => ['name' => 'age', 'type' => 'int', 'require' => 'true', 'default' => '18', 'desc' => '年龄', 'range' => '0-200',],
             ],
-            'puts'=>[
+            'put' => [
                 'username' => ['name' => 'username', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '用户名', 'range' => '',],
                 'age' => ['name' => 'age', 'type' => 'int', 'require' => 'true', 'default' => '18', 'desc' => '年龄', 'range' => '0-200',],
             ],
 
         ];
-        //可以合并公共参数
+
         return $rules;
     }
 
-    public $apiAuth = true;
-
-    public function index()
-    {
-        echo 123;
-    }
 
     /**
      * @title 获取用户信息
@@ -80,8 +68,11 @@ class Index extends Api
      */
     public function get()
     {
-        return $this->sendSuccess(['username' => 'restfulapi-tp5', 'age' => 1]);
-
+        return $this->sendSuccess([
+                'id' => 1,
+                'username' => 'dawn-api',
+                'age' => 1]
+        );
     }
 
     /**
@@ -93,21 +84,8 @@ class Index extends Api
      */
     public function post()
     {
-
-        return 4444;
-    }
-
-    /**
-     * @title 获puts
-     * @desc 获取用户信息
-     * @readme /doc/md/method.md
-     * @return int id ID
-     * @return string username 错误信息
-     * @return int age 年龄
-     */
-    public function puts()
-    {
-        return 4444;
+        // todo 添加操作
+        return $this->sendSuccess(['id' => '2']);
     }
 
 

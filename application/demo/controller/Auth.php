@@ -2,20 +2,24 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// |  User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/22 20:47
+// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 14:24
 // +----------------------------------------------------------------------
-// | TITLE: 测试文档
+// | TITLE: this to do?
 // +----------------------------------------------------------------------
 
+namespace app\demo\controller;
 
-namespace app\test\controller;
 
+use app\demo\auth\OauthAuth;
+use think\Request;
 
-class Doc extends \DawnApi\facade\Doc
+class Auth
 {
-    public function index()
+    public function accessToken()
     {
-        echo  123;
+        $request = Request::instance();
+        $OauthAuth = new OauthAuth();
+        return $OauthAuth->accessToken($request);
     }
 
 }
