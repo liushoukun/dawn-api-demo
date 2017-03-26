@@ -18,7 +18,9 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "^5.0",
-        "ircmaxell/random-lib": "^1.2"
+        "ircmaxell/random-lib": "^1.2",
+        "symfony/var-dumper": "^2.8",
+        "liushoukun/dawn-api": "dev-master"
     },
     "extra": {
         "think-path": "thinkphp"

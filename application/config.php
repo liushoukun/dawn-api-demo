@@ -56,13 +56,13 @@ return [
     // +----------------------------------------------------------------------
 
     // 默认模块名
-    'default_module' => 'demo',
+    'default_module' => 'test',
     // 禁止访问模块
     'deny_module_list' => ['common'],
     // 默认控制器名
-    'default_controller' => 'Doc',
+    'default_controller' => 'Index',
     // 默认操作名
-    'default_action' => 'apiList',
+    'default_action' => 'index',
     // 默认验证器
     'default_validate' => '',
     // 默认的空控制器名
@@ -244,4 +244,5 @@ return [
     ],
 
     'api_auth' => true,//是否开启API认证
+//    'api_auth_class'=> \app\test\auth\TestAuth::class,
 ];

@@ -2,22 +2,14 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// | Company: YG | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/2/17 18:24
+// | Company: YG | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/10 10:17
 // +----------------------------------------------------------------------
 // | TITLE: this to do?
 // +----------------------------------------------------------------------
 
-
-namespace app\apilib;
-
-
-use think\Log;
-
-class Behavior
-{
-    public function apiEnd(&$param)
-    {
-        Log::write('apiEnd', json_encode($param));
-    }
-
-}
+return [
+    'api_auth' => true,  //是否开启授权认证
+//    'auth_class' => \app\demo\auth\Auth::class, //授权认证类
+    'auth_class' => \app\demo\auth\OauthAuth::class, //授权认证类
+    'api_debug'=>false,//是否开启调试
+];

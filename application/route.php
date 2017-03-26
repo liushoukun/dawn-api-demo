@@ -13,16 +13,13 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
+
     '[v1]' => [
-        'user' => ['demo/User/init',], //用户模块接口
+        'user' => ['demo/User/restful',], //用户模块接口
     ],
 
-    //认证
-    '[oauth]' => [
-        'accessToken' => ['demo/Auth/accessToken',],//获取令牌
-        'refreshToken' => ['demo/Auth/refreshToken',],//刷新令牌
-        'getServerTime' => ['demo/Auth/getServerTime',],//获取服务器时间戳
-    ],
+    'accessToken'=>'demo/Auth/accessToken',//Oauth认证
+    'wiki'=>'demo/Wiki/index',//文档
 
 
 

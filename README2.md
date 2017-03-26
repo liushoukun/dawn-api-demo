@@ -32,8 +32,6 @@ composer require liushoukun/dawn-api
 cd /public/static/
 git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
 ```
-## demo 
- [dawn-api-demo](http://git.oschina.net/liushoukun/restfulapi-tp5)
 
 ## 使用
 
@@ -92,19 +90,19 @@ public $restMethodList ='get|post|delete';
  
   - GET的请求(获取用户信息)
   
-  ![GET的响应](/doc/images/get.png)
+  ![GET的响应](./public/doc/images/get.png)
  
  - POST的请求(添加用户)
  
-  ![POST的响应](/doc/images/post.png)
+  ![POST的响应](./public/doc/images/post.png)
 
  - PUT 让未允许的响应
  
-![让未允许的响应](/doc/images/put.png)
+![让未允许的响应](./public/doc/images/put.png)
 
  - DELETE 可以方法问题，但没有编写方法执行 _empty方法,如有需要可改写
  
-![DELETE的响应](/doc/images/delete.png)
+![DELETE的响应](./public/doc/images/delete.png)
 
 ## 开启授权认证
 
@@ -186,7 +184,7 @@ public    $apiAuth = true;
 
 > 可以获取到用户信息
 
-![DELETE的响应](/doc/images/get1.png)
+![DELETE的响应](./public/doc/images/get1.png)
 
 > 当然简单实现了Basic,Oauth Client Credentials Grant认证
 
@@ -242,17 +240,17 @@ class Auth
   /accessToken 
   headers Basic MjA4ODIwODg6bkdrNVIyd3JuWnFRMDJiZWQyOXJqemF4MVFXUkl1MU8=
 
- ![accessToken](/doc/images/get_access_token.png)
+ ![accessToken](./public/doc/images/get_access_token.png)
 
 3.请求接口
  /v1/user?access_token=cxXpnNIdf4aSIQFjR8NYH91Uwsg8jzMZ
 
-![accessToken](/doc/images/auth.png)
+![accessToken](./public/doc/images/auth.png)
 
 > 快捷方式利用postman
-![accessToken](/doc/images/auth1.png)
-![accessToken](/doc/images/auth2.png)
-![accessToken](/doc/images/auth3.png)
+![accessToken](./public/doc/images/auth1.png)
+![accessToken](./public/doc/images/auth2.png)
+![accessToken](./public/doc/images/auth3.png)
   
 ## 自动生成文档
 
@@ -292,7 +290,7 @@ return [
     '3' => ['name' => '用户接口', 'id' => '3', 'parent' => '1', 'readme' => '','class'=>\app\test\controller\User::class],//User接口文档
 ];
 ```
-![wiki](/doc/images/wiki.png)
+![wiki](./public/doc/images/wiki.png)
 
 |参数|必须|备注|作用|
 |:---:|:---:|:---:|:---:|
@@ -330,7 +328,7 @@ class User extends Base{}
 |readme|false|markdown文档|可以编写信息文档|
 
 
-![ClassDoc](/doc/images/demo12.png)
+![ClassDoc](./public/doc/images/demo12.png)
 
 
 - 具体接口文档
@@ -390,7 +388,7 @@ class User extends Base{}
 ```
 
 
-![data](/doc/images/demo14.png)
+![data](./public/doc/images/demo14.png)
   
 
    3. 返回参数(注释填写)
@@ -424,12 +422,12 @@ class User extends Base{}
 'enum'      => '枚举类型',
 'object'    => '对象',
 ```
-![return](/doc/images/demo15.png)
+![return](./public/doc/images/demo15.png)
   
 整体效果
-![all](/doc/images/demo16.png)
-![all](/doc/images/demo17.png)
-![all](/doc/images/demo18.png)
+![all](./public/doc/images/demo16.png)
+![all](./public/doc/images/demo17.png)
+![all](./public/doc/images/demo18.png)
  
 
   

@@ -2,17 +2,19 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/5 14:25
+// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 11:40
 // +----------------------------------------------------------------------
-// | TITLE: 接口文档
+// | TITLE: 文档访问
 // +----------------------------------------------------------------------
 
-namespace app\demo\controller;
+namespace app\test\controller;
 
 
-use app\apilib\BaseDoc;
+use DawnApi\facade\Doc;
 
-class Doc extends BaseDoc
+class Wiki extends Doc
 {
+    public  $titleDoc = 'DAWN-API文档';
+
 
 }

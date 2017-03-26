@@ -2,15 +2,15 @@
 // +----------------------------------------------------------------------
 // | When work is a pleasure, life is a joy!
 // +----------------------------------------------------------------------
-// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 14:24
+// | User: ShouKun Liu  |  Email:24147287@qq.com  | Time:2017/3/26 10:32
 // +----------------------------------------------------------------------
 // | TITLE: this to do?
 // +----------------------------------------------------------------------
 
-namespace app\demo\controller;
+namespace app\test\controller;
 
 
-use app\demo\auth\OauthAuth;
+use app\test\auth\OauthAuth;
 use think\Request;
 
 class Auth
