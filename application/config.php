@@ -56,11 +56,11 @@ return [
     // +----------------------------------------------------------------------
 
     // 默认模块名
-    'default_module' => 'test',
+    'default_module' => 'demo',
     // 禁止访问模块
     'deny_module_list' => ['common'],
     // 默认控制器名
-    'default_controller' => 'Index',
+    'default_controller' => 'Wiki',
     // 默认操作名
     'default_action' => 'index',
     // 默认验证器
