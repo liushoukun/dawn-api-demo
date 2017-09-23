@@ -22,13 +22,9 @@ use think\Request;
  */
 class User extends Base
 {
-
-
     //是否开启授权认证
     public $apiAuth = true;
 
-    // 允许访问的请求类型
-    public $restMethodList = 'get|post';
 
     /**
      * 参数规则
@@ -61,13 +57,6 @@ class User extends Base
         return $rules;
     }
 
-
-    /**
-     * get
-     *
-     * @param Request $request
-     * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\Xml
-     */
     /**
      * get响应
      * @title 获取用户
@@ -105,5 +94,86 @@ class User extends Base
     }
 
 
+    /**
+     * 显示资源列表
+     *
+     * @return \think\Response
+     */
+    public function index()
+    {
+        //
+        echo  'index';
+    }
 
+    /**
+     * 显示创建资源表单页.
+     *
+     * @return \think\Response
+     */
+    public function create()
+    {
+        //
+        echo  'create';
+    }
+
+    /**
+     * 保存新建的资源
+     *
+     * @param  \think\Request  $request
+     * @return \think\Response
+     */
+    public function save(Request $request)
+    {
+        //
+        echo  'save';
+    }
+
+    /**
+     * 显示指定的资源
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function read($id)
+    {
+        //
+        echo 'read';
+    }
+
+    /**
+     * 显示编辑资源表单页.
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function edit($id)
+    {
+        //
+        echo  'edit';
+    }
+
+    /**
+     * 保存更新的资源
+     *
+     * @param  \think\Request  $request
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        echo  'update';
+    }
+
+    /**
+     * 删除指定资源
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function delete($id)
+    {
+        //
+        echo  'delete';
+    }
 }

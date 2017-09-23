@@ -20,6 +20,6 @@ class Base extends Api
     public $restMethodList = 'get|post|put|delete|patch|head|options';
 
     //是否开启授权认证
-    public    $apiAuth = true;
+    public    $apiAuth = false;
 
 }
