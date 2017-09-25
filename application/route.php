@@ -9,27 +9,21 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+use think\Route;
 
-
+Route::resource('user','demo/User');
 return [
     '__pattern__' => [
         'name' => '\w+',
     ],
 
-//    '[v1]' => [
-//        'user' => ['demo/User/restful',], //用户模块接口
-//    ],
-
     '__rest__'=>[
-        // 指向index模块的blog控制器
-        'user'=>'demo/User',
         'index'=>'demo/IndexController',
     ],
 
     'accessToken'=>'demo/Auth/accessToken',//Oauth认证
     'wiki'=>'demo/Wiki/index',//文档
 
-
-
-
 ];
+
+

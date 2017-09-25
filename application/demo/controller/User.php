@@ -23,8 +23,9 @@ use think\Request;
 class User extends Base
 {
     //是否开启授权认证
-    public $apiAuth = true;
-
+    public $apiAuth = false;
+    //附加方法
+    protected $extraMethodList = 'sendCode|';
 
     /**
      * 参数规则
@@ -39,141 +40,129 @@ class User extends Base
     public static function getRules()
     {
         $rules = [
-            //共用参数
-            'all' => [
-                'access_token' => ['name' => 'access_token', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '授权令牌', 'range' => '',]
+            'index' => [
             ],
-
-
-            'get' => [
-                'id' => ['name' => 'id', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => 'id', 'range' => '',],
-          ],
-            'post' => [
+            'create' => [
+                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
+                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
+            ],
+            'sendCode' => [
                 'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
                 'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
             ]
+
         ];
         //可以合并公共参数
         return $rules;
+
     }
 
     /**
-     * get响应
-     * @title 获取用户
+     * @title 发送CODE
+     * @readme /doc/md/method.md
+     */
+    public function sendCode()
+    {
+        //send message
+        return $this->sendSuccess();
+
+    }
+
+    /**
+     * @title 获取列表
+     * @return string name 名字
+     * @return string id  id
+     * @return integer age  年龄
+     * @readme /doc/md/method.md
+     */
+    public function index()
+    {
+        return $this->sendSuccess(self::testUserData());
+    }
+
+
+    /**
+     * @title 创建用户
+     * @param Request $request
      * @return string name 名字
      * @return string id  id
      * @return object user  用户信息
      * @readme /doc/md/method.md
-     * @param Request $request
-     */
-    public function get(Request $request)
-    {
-        $user = self::$app['auth']->getUser();
-        // todo find
-        return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1, 'user' => $user]);
-    }
-
-    /**
-     * post
-     *
-
-     * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Xml
-     */
-    /**
-     * get响应
-     * @title 新增用户
-     * @return int id 用户id
-     * @readme /doc/md/method.md
-     * @param Request $request
-     * @param Request $request
-     */
-    public function post(Request $request)
-    {
-        //todo create
-        return $this->sendError(400, '用户名不能为空');
-    }
-
-
-    /**
-     * 显示资源列表
-     *
-     * @return \think\Response
-     */
-    public function index()
-    {
-        //
-        echo  'index';
-    }
-
-    /**
-     * 显示创建资源表单页.
-     *
-     * @return \think\Response
-     */
-    public function create()
-    {
-        //
-        echo  'create';
-    }
-
-    /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
+     * @param  \think\Request $request
      */
     public function save(Request $request)
     {
-        //
-        echo  'save';
+        $data = $request->input();
+        // db save
+        $data['id'] = 4;
+        return $this->sendSuccess($data);
+
     }
 
     /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
+     * @title 获取单个用户信息
+     * @param  int $id
+     * @return string name 名字
+     * @return string id  id
+     * @return object user  用户信息
+     * @readme /doc/md/method.md
      * @return \think\Response
      */
     public function read($id)
     {
         //
-        echo 'read';
+        $testUserData = self::testUserData();
+        return $this->sendSuccess($testUserData[$id]);
     }
 
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function edit($id)
-    {
-        //
-        echo  'edit';
-    }
 
     /**
      * 保存更新的资源
      *
-     * @param  \think\Request  $request
-     * @param  int  $id
+     * @param  \think\Request $request
+     * @param  int $id
+     * @param  int $id
+     * @title 更新用户
+     * @return string name 名字
+     * @return string id  id
+     * @readme /doc/md/method.md
      * @return \think\Response
      */
     public function update(Request $request, $id)
     {
         //
-        echo  'update';
+        $testUserData = self::testUserData();
+        $data = $testUserData[$id];
+        //更新
+        $data['age'] = $request->post('age');
+
+        return $this->sendSuccess($data);
     }
 
     /**
      * 删除指定资源
      *
-     * @param  int  $id
+     * @param  int $id
+     * @return object user  用户信息
+     * @title 删除用户
      * @return \think\Response
      */
     public function delete($id)
     {
-        //
-        echo  'delete';
+        $testUserData = self::testUserData();
+        // delete
+        $user = $testUserData[$id];
+        unset($testUserData[$id]);
+        return $this->sendSuccess(['user' => $user], 'User deleted.');
+    }
+
+
+    public static function testUserData()
+    {
+        return [
+            1 => ['id' => '1', 'name' => 'dawn', 'age' => 1],
+            2 => ['id' => '2', 'name' => 'dawn1', 'age' => 2],
+            3 => ['id' => '3', 'name' => 'dawn3', 'age' => 3],
+        ];
     }
 }

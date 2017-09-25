@@ -9,15 +9,9 @@
 namespace app\demo\controller;
 
 
-use DawnApi\facade\Api;
-class Base extends Api
+use DawnApi\facade\ApiController;
+class Base extends ApiController
 {
-
-    /**
-     * 允许访问的请求类型
-     * @var string
-     */
-    public $restMethodList = 'get|post|put|delete|patch|head|options';
 
     //是否开启授权认证
     public    $apiAuth = false;
