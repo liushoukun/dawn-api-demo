@@ -11,6 +11,7 @@ namespace app\demo\auth;
 
 
 use DawnApi\auth\OAuth;
+use DawnApi\exception\UnauthorizedException;
 use RandomLib\Factory;
 use think\Cache;
 use think\Request;
@@ -30,11 +31,12 @@ class OauthAuth extends OAuth
             $this->getClient($request);
         } catch (UnauthorizedException $e) {
             //错误则返回给客户端
-            return $this->sendError(401, $e->getMessage(), 401, [], $e->getHeaders());
-        } catch (\Exception $e) {
+            return $this->sendError(401, $e->getMessage(), 401, [], $e->getHeaders(),['WWW-Authenticate' => 'Basic']);
+        } catch (Exception $e) {
             return $this->sendError(500, $e->getMessage(), 500);
         }
         //校验信息
+
         if ($this->getClientInfo($this->client_id)->checkSecret()) {
             //通过下放令牌
             $access_token = $this->setAccessToken($this->clientInfo);

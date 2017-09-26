@@ -23,9 +23,9 @@ use think\Request;
 class User extends Base
 {
     //是否开启授权认证
-    public $apiAuth = false;
+    public $apiAuth = true;
     //附加方法
-    protected $extraMethodList = 'sendCode|';
+    protected $extraActionList = ['sendCode'];
 
     /**
      * 参数规则
@@ -115,7 +115,6 @@ class User extends Base
         return $this->sendSuccess($testUserData[$id]);
     }
 
-
     /**
      * 保存更新的资源
      *
@@ -150,6 +149,7 @@ class User extends Base
     public function delete($id)
     {
         $testUserData = self::testUserData();
+
         // delete
         $user = $testUserData[$id];
         unset($testUserData[$id]);
@@ -165,4 +165,6 @@ class User extends Base
             3 => ['id' => '3', 'name' => 'dawn3', 'age' => 3],
         ];
     }
+
+
 }

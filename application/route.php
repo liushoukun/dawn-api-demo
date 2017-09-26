@@ -12,18 +12,16 @@
 use think\Route;
 
 Route::resource('user','demo/User');
+Route::resource('index','demo/Index');
+
+\DawnApi\route\DawnRoute::wiki();
 return [
     '__pattern__' => [
         'name' => '\w+',
     ],
 
-    '__rest__'=>[
-        'index'=>'demo/IndexController',
-    ],
 
     'accessToken'=>'demo/Auth/accessToken',//Oauth认证
-    'wiki'=>'demo/Wiki/index',//文档
-
 ];
 
 
