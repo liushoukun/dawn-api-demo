@@ -242,26 +242,12 @@ Route::any('accessToken','demo/auth/accessToken');//Oauth
 
 2. 配置路由
 ```php
- 'wiki'=>'demo/Wiki/index',//文档
+// 文档
+\DawnApi\route\DawnRoute::wiki();
 ```
  
-3.配置文档显示目录
 
-```php
-    /**
-     * 获取文档
-     * @return mixed
-     */
-    public static function getApiDocList()
-    {
-        //todo 可以写配置文件或数据
-        $apiList = Config::get('api_doc');
-        return $apiList;
-    }
-```
-
-
->可以改写次方法以存储以无限级的方式，为了方便采用的是配置方式
+>可以改写该方法以存储数据获取，为了方便采用的是配置方式
 
 tp5 增加额外配置  创建application/extra/api_doc.php 文件
 
@@ -352,21 +338,21 @@ class User extends Base{}
     public static function getRules()
     {
         $rules = [
-                //共用参数
-                'all'=>[
-                    'time'=> ['name' => 'time', 'type' => 'int', 'require' => 'true', 'default' => '', 'desc' => '时间戳', 'range' => '',]
-                ],
+            'index' => [
+            ],
+            'create' => [
+                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
+                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
+            ],
+            'sendCode' => [
+                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
+                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
+            ]
 
-                'get'=>[
-                    'id' => ['name' => 'id', 'type' => 'int', 'require' => 'true', 'default' => '', 'desc' => '用户id', 'range' => '',]
-                ],
-                'post'=>[
-                    'username' => ['name' => 'username', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '用户名', 'range' => '',],
-                    'age' => ['name' => 'age', 'type' => 'int', 'require' => 'true', 'default' => '18', 'desc' => '年龄', 'range' => '0-200',],
-                ]
         ];
-        //合并父级类参数
-        return array_merge(parent::getRules(),$rules);
+        //可以合并公共参数
+        return $rules;
+
     }
 ```
 
