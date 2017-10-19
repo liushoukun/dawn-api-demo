@@ -1,6 +1,10 @@
 Dawn-Api 
 ===============
-
+[![Latest Stable Version](https://poser.pugx.org/liushoukun/dawn-api/v/stable)](https://packagist.org/packages/liushoukun/dawn-api)
+[![Total Downloads](https://poser.pugx.org/liushoukun/dawn-api/downloads)](https://packagist.org/packages/liushoukun/dawn-api)
+[![Latest Unstable Version](https://poser.pugx.org/liushoukun/dawn-api/v/unstable)](https://packagist.org/packages/liushoukun/dawn-api)
+[![License](https://poser.pugx.org/liushoukun/dawn-api/license)](https://packagist.org/packages/liushoukun/dawn-api)
+[![Monthly Downloads](https://poser.pugx.org/liushoukun/dawn-api/d/monthly)](https://packagist.org/packages/liushoukun/dawn-api)
 [Toc]
 
 ## 说明
@@ -36,73 +40,85 @@ git clone  https://git.oschina.net/liushoukun/hadmin.git
 ## 使用
 
  1. 新建demo 模块
- 2. 创建业务基础类 Base 继承 Api 
+ 2. 创建业务基础类 Base 继承 ApiController 
+ ```php
+<?php
+    namespace app\demo\controller;
  
- 3. 创建一个用户接口 User 继承 Base
  
- 4. 添加路由 action需要填写restful(会进行调用)
+    use DawnApi\facade\ApiController;
+    class Base extends ApiController
+    {
+ 
+     //是否开启授权认证
+     public    $apiAuth = true;
+ 
+    }
+ ?>
+ 
+ ```
+ 3. 创建一个用户接口 User 继承  Base;
+ 
+ ```
+ class User extends Base
+ ```
+ 
+ 4. 添加资源路由 
  > /v1/user 
 ```php
-  '[v1]' => [
-        'user' => ['demo/User/restful',], //用户模块接口
-    ],
+Route::group('v1',function (){
+    Route::resource('user','demo/User');
+});
+
 ```
+|标识|请求类型|生成路由规则|对应操作方法（默认）|
+|---|---|---|---|
+|index|GET|v1/user|index|
+|save|POST|v1/user|save|
+|read|GET|v1/user/:id|read|
+|update|PUT|v1/user/:id|update|
+|delete|DELETE|v1/user/:id|delete|
+|||||
+|create|GET|v1/user/create|create|
+|edit|GET|v1/user/:id/edit|edit|
 
 
- 5. 设置允许访问的方式
+> 附加方法
+
+ 如需要在添加一些额外的操作 如:发送验证码
+ 在该类$extraActionList 属性添加方法
+ protected $extraActionList = ['sendCode'];   //附加方法
+之后注册路由
+
+```
+Route::group('v1',function (){
+    Route::any('user/sendCode','demo/User/sendCode');//需要在资源路由之前注册
+    Route::resource('user','demo/User');
+});
+```
+> 跳过鉴权
+如有有需要单操作跳过鉴权
+ 在该类$skipAuthActionList 属性添加方法，即可跳过鉴权
+protected $skipAuthActionList = ['sendCode']; //跳过鉴权的方法
+
+
+[资源路由文档->](https://www.kancloud.cn/manual/thinkphp5/118035)
+
+
+>返回处理
 
 ```php
-// 允许访问的请求类型
-public $restMethodList ='get|post|delete';
+   // 成功
+  return $this->sendSuccess($data = [], $message = 'success', $code = 200, $headers = [], $options = [])
+   // 错误
+  return $this->sendError($error = 400, $message = 'error', $code = 400, $data = [], $headers = [], $options = [])
+    // 重定向
+  return $this-> sendRedirect($url, $params = [], $code = 302, $with = [])
 ```
 
-- 获取用户(get),post(新增用户)的相应方法 
 
 
-```php
-  /**
-      * get
-      *
-      * @param Request $request
-      * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\Xml
-      */
-     public function get(Request $request)
-     {
-         // todo find
-         return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1]);
-     }
- 
-     /**
-      * post
-      *
-      * @param Request $request
-      * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Xml
-      */
-     public function post(Request $request)
-     {
-         //todo create
-         return $this->sendError(400, '用户名不能为空');
-     }    
-```
-
- 
  4. 请求接口
- 
-  - GET的请求(获取用户信息)
-  
-  ![GET的响应](./public/doc/images/get.png)
- 
- - POST的请求(添加用户)
- 
-  ![POST的响应](./public/doc/images/post.png)
-
- - PUT 让未允许的响应
- 
-![让未允许的响应](./public/doc/images/put.png)
-
- - DELETE 可以方法问题，但没有编写方法执行 _empty方法,如有需要可改写
- 
-![DELETE的响应](./public/doc/images/delete.png)
 
 ## 开启授权认证
 
@@ -160,44 +176,25 @@ public    $apiAuth = true;
 |false|true|认证关闭|
 
  4. 配置验证类
+ > 简单实现了Basic & Oauth Client Credentials Grant认证  
+-  Basic
 ```php
-   'auth_class' => \app\demo\auth\Auth::class, //授权认证类
+   'auth_class' => \app\demo\auth\BasicAuth::class, //授权认证类
 ```
 
-
-5. 改写get方法
-
-```php
-    /**
-     * get
-     *
-     * @param Request $request
-     * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\Xml
-     */
-    public function get(Request $request)
-    {
-        $user = self::$app['auth']->getUser();
-        // todo find
-        return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1, 'user' => $user]);
-    }
-```
-
-> 可以获取到用户信息
-
-![DELETE的响应](./public/doc/images/get1.png)
-
-> 当然简单实现了Basic,Oauth Client Credentials Grant认证
+/v1/user?client_id=test&secret=test 
+OR 
+v1/user      headers Basic
 
 - Oauth Client Credentials Grant
  1. 配置验证类
 ```php
-   'auth_class' => \app\demo\auth\Auth::class, //授权认证类
+   'auth_class' => \app\demo\auth\OauthAuth::class, //授权认证类
 ```
  2. 获取access_token
  - 编写可访问的方法获取access_token
 ```php
 namespace app\demo\controller;
-
 
 use app\demo\auth\OauthAuth;
 use think\Request;
@@ -215,24 +212,9 @@ class Auth
 ```
  - 配置路由
 ```php
- 'accessToken'=>'demo/Auth/accessToken',//Oauth认证
+Route::any('accessToken','demo/auth/accessToken');//Oauth
 ```
-
 按需改写获取客户端信息
-```php
-
-    /**
-     * 返回用户信息
-     * @return array
-     */
-    public static function getUserInfo()
-    {
-        return [
-            'client_id' => '20882088',//app_id
-            'secret' => 'nGk5R2wrnZqQ02bed29rjzax1QWRIu1O',
-            'name' => 'test_client'];
-    }
-```
 
  - 请求获取
   /accessToken?client_id=20882088&secret=nGk5R2wrnZqQ02bed29rjzax1QWRIu1O
@@ -251,7 +233,8 @@ class Auth
 ![accessToken](./public/doc/images/auth1.png)
 ![accessToken](./public/doc/images/auth2.png)
 ![accessToken](./public/doc/images/auth3.png)
-  
+
+
 ## 自动生成文档
 
 1. 创建Doc文档显示控制器

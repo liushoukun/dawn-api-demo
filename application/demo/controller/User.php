@@ -26,37 +26,8 @@ class User extends Base
     public $apiAuth = true;
     //附加方法
     protected $extraActionList = ['sendCode'];
-
-    /**
-     * 参数规则
-     * @name 字段名称
-     * @type 类型
-     * @require 是否必须
-     * @default 默认值
-     * @desc 说明
-     * @range 范围
-     * @return array
-     */
-    public static function getRules()
-    {
-        $rules = [
-            'index' => [
-            ],
-            'create' => [
-                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
-                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
-            ],
-            'sendCode' => [
-                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
-                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
-            ]
-
-        ];
-        //可以合并公共参数
-        return $rules;
-
-    }
-
+    //跳过鉴权的方法
+    protected $skipAuthActionList = ['sendCode'];
     /**
      * @title 发送CODE
      * @readme /doc/md/method.md
@@ -64,7 +35,7 @@ class User extends Base
     public function sendCode()
     {
         //send message
-        return $this->sendSuccess();
+        return $this->sendSuccess(['code'=>123]);
 
     }
 
@@ -78,6 +49,7 @@ class User extends Base
     public function index()
     {
         return $this->sendSuccess(self::testUserData());
+
     }
 
 
@@ -164,6 +136,40 @@ class User extends Base
             2 => ['id' => '2', 'name' => 'dawn1', 'age' => 2],
             3 => ['id' => '3', 'name' => 'dawn3', 'age' => 3],
         ];
+    }
+
+
+
+
+
+    /**
+     * 参数规则
+     * @name 字段名称
+     * @type 类型
+     * @require 是否必须
+     * @default 默认值
+     * @desc 说明
+     * @range 范围
+     * @return array
+     */
+    public static function getRules()
+    {
+        $rules = [
+            'index' => [
+            ],
+            'create' => [
+                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
+                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
+            ],
+            'sendCode' => [
+                'name' => ['name' => 'name', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '名称', 'range' => '',],
+                'age' => ['name' => 'age', 'type' => 'string', 'require' => 'true', 'default' => '', 'desc' => '年龄', 'range' => '',],
+            ]
+
+        ];
+        //可以合并公共参数
+        return $rules;
+
     }
 
 

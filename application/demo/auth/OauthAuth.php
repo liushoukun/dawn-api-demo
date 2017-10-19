@@ -98,14 +98,23 @@ class OauthAuth extends OAuth
 
     /**
      * 返回用户信息
+     * @param $client_id
      * @return array
      */
-    public static function getUserInfo()
+    public static function getUserInfo($client_id)
     {
-        return [
-            'client_id' => '20882088',//app_id
-            'secret' => 'nGk5R2wrnZqQ02bed29rjzax1QWRIu1O',
-            'name' => 'test_client'];
+
+
+        $userList = [
+          '20882088'=>[
+              'client_id' => '20882088',//app_id
+              'secret' => 'nGk5R2wrnZqQ02bed29rjzax1QWRIu1O',
+              'name' => 'test_client']
+
+        ];
+        //  key $client_id
+        return $userList[$client_id];
+
     }
 
     /**
@@ -116,8 +125,7 @@ class OauthAuth extends OAuth
     public function getClientInfo($client_id)
     {
         // todo 通过客户端$client_id 获取所有信息
-//        dump($client_id);
-        $this->clientInfo = self::getUserInfo();
+        $this->clientInfo = self::getUserInfo($client_id);
         return $this;
     }
 

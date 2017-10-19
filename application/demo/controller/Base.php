@@ -14,6 +14,6 @@ class Base extends ApiController
 {
 
     //是否开启授权认证
-    public    $apiAuth = false;
+    public    $apiAuth = true;
 
 }

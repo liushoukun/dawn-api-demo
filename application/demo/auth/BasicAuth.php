@@ -13,6 +13,10 @@ use think\Request;
 
 class BasicAuth extends Basic
 {
+    public function getUser()
+    {
+        return $this->getUserInfo();
+    }
 
 
     /**
@@ -22,16 +26,20 @@ class BasicAuth extends Basic
      */
     public function certification(Request $request)
     {
-        return  ($this->username == 'test' && $this->password == 'test') ? true : false;
+        return ($this->username == 'test' && $this->password == 'test') ? true : false;
     }
 
     /**
      * 获取用户信息
      * @return mixed
      */
-    public function getUser()
+    public function getUserInfo()
     {
-        // TODO: Implement getUser() method.
+        return [
+            'client_id' => $this->username,//app_id
+            'secret' => $this->password,
+            'name' => 'test_client'
+        ];
     }
 
 

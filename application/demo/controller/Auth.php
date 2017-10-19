@@ -10,6 +10,7 @@
 namespace app\demo\controller;
 
 
+use app\demo\auth\BasicAuth;
 use app\demo\auth\OauthAuth;
 use think\Request;
 

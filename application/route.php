@@ -11,17 +11,31 @@
 
 use think\Route;
 
-Route::resource('user','demo/User');
-Route::resource('index','demo/Index');
+//首页
+Route::any('/',function (){
+    return redirect('wiki');
+});
 
+
+
+
+Route::group('v1',function (){
+    Route::any('user/sendCode','demo/User/sendCode');
+    Route::resource('user','demo/User');
+});
+
+Route::any('accessToken','demo/auth/accessToken');//Oauth
+
+
+// 文档
 \DawnApi\route\DawnRoute::wiki();
+
+
+
 return [
     '__pattern__' => [
         'name' => '\w+',
     ],
-
-
-    'accessToken'=>'demo/Auth/accessToken',//Oauth认证
 ];
 
 
